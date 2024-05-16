@@ -106,7 +106,7 @@ struct HomePageView: View {
                         Spacer()
                     }
                     .frame(width: geometry.size.width * 0.2)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom))
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
 
                     // Main content area
                     VStack {
@@ -124,13 +124,13 @@ struct HomePageView: View {
                         HStack {
                             Image("coinIcon")
                                 .resizable()
-                                .frame(width: 32, height: 32)  // Bigger coin icon
+                                .frame(width: 40, height: 40)  // Bigger coin icon
                             Text("\(coinManager.coins)")
                                 .font(.title)
                                 .padding(.leading, 5)
                                 .foregroundColor(Color.white)
                         }
-                        .padding()
+                        .padding(.bottom, 20)
                     }
                     .frame(width: geometry.size.width * 0.8)
                     .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))

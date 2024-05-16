@@ -30,6 +30,7 @@ struct TimerView: View {
             TimerPicker(minutes: $minutes, seconds: $seconds)
                 .onChange(of: minutes) { _ in updateRemainingTime() }
                 .onChange(of: seconds) { _ in updateRemainingTime() }
+                .padding(.top, 20)
 
             Text("\(Int(viewModel.timeRemaining / 60)) minutes \(Int(viewModel.timeRemaining.truncatingRemainder(dividingBy: 60))) seconds")
                 .font(.title)
@@ -64,13 +65,13 @@ struct TimerView: View {
             HStack {
                 Image("coinIcon")
                     .resizable()
-                    .frame(width: 32, height: 32)  // Bigger coin icon
+                    .frame(width: 40, height: 40)  // Bigger coin icon
                 Text("\(coinManager.coins)")
                     .font(.title)
                     .padding(.leading, 5)
                     .foregroundColor(Color.white)
             }
-            .padding()
+            .padding(.bottom, 20)
         }
         .padding()
         .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
