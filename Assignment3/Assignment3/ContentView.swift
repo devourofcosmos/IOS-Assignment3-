@@ -1,18 +1,23 @@
-//
-//  Assignment3App.swift
-//  Assignment3
-//
-//  Created by BUC on 12/5/2024.
-//
-
 import SwiftUI
 
+
 @main
-struct YourAppName: App {
+struct YourAppNameApp: App {
     var body: some Scene {
         WindowGroup {
-            HomePageView()
+            ContentView()
         }
     }
 }
 
+struct ContentView: View {
+    var body: some View {
+        HomePageView()
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}

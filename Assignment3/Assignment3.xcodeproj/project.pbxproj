@@ -13,7 +13,15 @@
 		8B5D4B162BF0EB2200572768 /* Assignment3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D4B152BF0EB2200572768 /* Assignment3Tests.swift */; };
 		8B5D4B202BF0EB2200572768 /* Assignment3UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D4B1F2BF0EB2200572768 /* Assignment3UITests.swift */; };
 		8B5D4B222BF0EB2200572768 /* Assignment3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5D4B212BF0EB2200572768 /* Assignment3UITestsLaunchTests.swift */; };
-		8B7B7C752BF0F00A001E1E52 /* TimerPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B7C742BF0F00A001E1E52 /* TimerPage.swift */; };
+		8B7B7C752BF0F00A001E1E52 /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7B7C742BF0F00A001E1E52 /* TimerView.swift */; };
+		8BA844372BF6776800F99183 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844362BF6776800F99183 /* HomePageView.swift */; };
+		8BA844392BF6784400F99183 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844382BF6784400F99183 /* Character.swift */; };
+		8BA8443B2BF678D000F99183 /* CharacterSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443A2BF678D000F99183 /* CharacterSelectionView.swift */; };
+		8BA8443D2BF678FC00F99183 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443C2BF678FC00F99183 /* Helper.swift */; };
+		8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */; };
+		8BA844412BF67D7F00F99183 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844402BF67D7F00F99183 /* HomeView.swift */; };
+		8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844422BF67D9400F99183 /* Timeline View.swift */; };
+		8BA844452BF67DA500F99183 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844442BF67DA500F99183 /* AccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +51,15 @@
 		8B5D4B1B2BF0EB2200572768 /* Assignment3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Assignment3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B5D4B1F2BF0EB2200572768 /* Assignment3UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment3UITests.swift; sourceTree = "<group>"; };
 		8B5D4B212BF0EB2200572768 /* Assignment3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignment3UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		8B7B7C742BF0F00A001E1E52 /* TimerPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerPage.swift; sourceTree = "<group>"; };
+		8B7B7C742BF0F00A001E1E52 /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		8BA844362BF6776800F99183 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		8BA844382BF6784400F99183 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		8BA8443A2BF678D000F99183 /* CharacterSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionView.swift; sourceTree = "<group>"; };
+		8BA8443C2BF678FC00F99183 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerViewModel.swift; sourceTree = "<group>"; };
+		8BA844402BF67D7F00F99183 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8BA844422BF67D9400F99183 /* Timeline View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline View.swift"; sourceTree = "<group>"; };
+		8BA844442BF67DA500F99183 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +111,15 @@
 			isa = PBXGroup;
 			children = (
 				8B5D4B042BF0EB2100572768 /* ContentView.swift */,
-				8B7B7C742BF0F00A001E1E52 /* TimerPage.swift */,
+				8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */,
+				8B7B7C742BF0F00A001E1E52 /* TimerView.swift */,
+				8BA844362BF6776800F99183 /* HomePageView.swift */,
+				8BA844382BF6784400F99183 /* Character.swift */,
+				8BA8443A2BF678D000F99183 /* CharacterSelectionView.swift */,
+				8BA8443C2BF678FC00F99183 /* Helper.swift */,
+				8BA844402BF67D7F00F99183 /* HomeView.swift */,
+				8BA844422BF67D9400F99183 /* Timeline View.swift */,
+				8BA844442BF67DA500F99183 /* AccountView.swift */,
 				8B5D4B082BF0EB2200572768 /* Assets.xcassets */,
 				8B5D4B0A2BF0EB2200572768 /* Preview Content */,
 			);
@@ -257,8 +281,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B7B7C752BF0F00A001E1E52 /* TimerPage.swift in Sources */,
+				8B7B7C752BF0F00A001E1E52 /* TimerView.swift in Sources */,
+				8BA844372BF6776800F99183 /* HomePageView.swift in Sources */,
+				8BA8443B2BF678D000F99183 /* CharacterSelectionView.swift in Sources */,
 				8B5D4B052BF0EB2100572768 /* ContentView.swift in Sources */,
+				8BA844452BF67DA500F99183 /* AccountView.swift in Sources */,
+				8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */,
+				8BA844412BF67D7F00F99183 /* HomeView.swift in Sources */,
+				8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */,
+				8BA844392BF6784400F99183 /* Character.swift in Sources */,
+				8BA8443D2BF678FC00F99183 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
