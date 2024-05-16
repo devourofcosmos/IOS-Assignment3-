@@ -19,7 +19,6 @@
 		8BA8443B2BF678D000F99183 /* CharacterSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443A2BF678D000F99183 /* CharacterSelectionView.swift */; };
 		8BA8443D2BF678FC00F99183 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443C2BF678FC00F99183 /* Helper.swift */; };
 		8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */; };
-		8BA844412BF67D7F00F99183 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844402BF67D7F00F99183 /* HomeView.swift */; };
 		8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844422BF67D9400F99183 /* Timeline View.swift */; };
 		8BA844452BF67DA500F99183 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844442BF67DA500F99183 /* AccountView.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +56,6 @@
 		8BA8443A2BF678D000F99183 /* CharacterSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectionView.swift; sourceTree = "<group>"; };
 		8BA8443C2BF678FC00F99183 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerViewModel.swift; sourceTree = "<group>"; };
-		8BA844402BF67D7F00F99183 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8BA844422BF67D9400F99183 /* Timeline View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline View.swift"; sourceTree = "<group>"; };
 		8BA844442BF67DA500F99183 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,7 +115,6 @@
 				8BA844382BF6784400F99183 /* Character.swift */,
 				8BA8443A2BF678D000F99183 /* CharacterSelectionView.swift */,
 				8BA8443C2BF678FC00F99183 /* Helper.swift */,
-				8BA844402BF67D7F00F99183 /* HomeView.swift */,
 				8BA844422BF67D9400F99183 /* Timeline View.swift */,
 				8BA844442BF67DA500F99183 /* AccountView.swift */,
 				8B5D4B082BF0EB2200572768 /* Assets.xcassets */,
@@ -287,7 +284,6 @@
 				8B5D4B052BF0EB2100572768 /* ContentView.swift in Sources */,
 				8BA844452BF67DA500F99183 /* AccountView.swift in Sources */,
 				8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */,
-				8BA844412BF67D7F00F99183 /* HomeView.swift in Sources */,
 				8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */,
 				8BA844392BF6784400F99183 /* Character.swift in Sources */,
 				8BA8443D2BF678FC00F99183 /* Helper.swift in Sources */,
