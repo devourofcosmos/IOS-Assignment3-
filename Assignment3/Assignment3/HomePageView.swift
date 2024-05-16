@@ -3,7 +3,7 @@ import SwiftUI
 // ViewModel for managing the timer
 class PomodoroTimerViewModel: ObservableObject {
     @Published var timerIsActive = false  // Boolean to track if the timer is active
-    @Published var timeRemaining: TimeInterval = 180 * 60 // Stores the time remaining, initialized to 180 minutes
+    @Published var timeRemaining: TimeInterval = 5 * 60  // Default to 5 minutes for demonstration
 
     private var timer: Timer?  // Optional Timer object
 
@@ -24,15 +24,21 @@ class PomodoroTimerViewModel: ObservableObject {
         timerIsActive = false  // Sets the timer state to inactive
         timer?.invalidate()  // Invalidates the timer
         timer = nil  // Clears the timer
-        timeRemaining = 180 * 60 // Reset the time to 180 minutes
+    }
+
+    // Function to set time remaining directly
+    func setTime(hours: Int, minutes: Int, seconds: Int) {
+        timeRemaining = TimeInterval((hours * 3600) + (minutes * 60) + seconds)
     }
 }
 
 // SwiftUI view that acts as the main interface for the application
 struct HomePageView: View {
     @StateObject private var viewModel = PomodoroTimerViewModel() // ViewModel instance
-    @State private var selectedCharacter = "character1"  // Currently selected character image
-    @State private var adjustingTime = false  // State to track if time adjustment mode is active
+
+    @State private var hours = 0
+    @State private var minutes = 5
+    @State private var seconds = 0
 
     var body: some View {
         GeometryReader { geometry in
@@ -59,17 +65,24 @@ struct HomePageView: View {
                 VStack {
                     Spacer()
                     ZStack {
-                        CircularSlider(timeRemaining: $viewModel.timeRemaining, maxTime: 180 * 60, diameter: geometry.size.width * 0.6)
-                        Image(selectedCharacter).resizable().scaledToFit().clipShape(Circle()).frame(width: geometry.size.width * 0.5, height: geometry.size.width * 0.5)
+                        CircularProgressView(progress: viewModel.timeRemaining / (TimeInterval(hours * 3600 + minutes * 60 + seconds) + 1), diameter: geometry.size.width * 0.5)
+                        Image("character1").resizable().scaledToFit().clipShape(Circle()).frame(width: geometry.size.width * 0.5, height: geometry.size.width * 0.5)
                     }
-
-                    Text("\(Int(viewModel.timeRemaining / 60)) minutes").font(.title).padding(.top, 20)
+                    
+                    // Timer Picker
+                    TimerPicker(hours: $hours, minutes: $minutes, seconds: $seconds)
+                        .onChange(of: hours) { _ in updateRemainingTime() }
+                        .onChange(of: minutes) { _ in updateRemainingTime() }
+                        .onChange(of: seconds) { _ in updateRemainingTime() }
+                    
+                    Text("\(Int(viewModel.timeRemaining / 60)) minutes \(Int(viewModel.timeRemaining.truncatingRemainder(dividingBy: 60))) seconds").font(.title).padding(.top, 20)
 
                     HStack {
                         Button(action: {
                             if viewModel.timerIsActive {
                                 viewModel.stopTimer()
                             } else {
+                                viewModel.setTime(hours: hours, minutes: minutes, seconds: seconds)
                                 viewModel.startTimer()
                             }
                         }) {
@@ -82,13 +95,13 @@ struct HomePageView: View {
 
                         Button("Reset") {
                             viewModel.stopTimer()
+                            updateRemainingTime()
                         }
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.blue)
                         .clipShape(Circle())
                     }
-
                     Spacer()
                 }
                 .padding(.leading, geometry.size.width * 0.1)
@@ -96,33 +109,70 @@ struct HomePageView: View {
             .edgesIgnoringSafeArea(.all)
         }
     }
+    
+    private func updateRemainingTime() {
+        viewModel.setTime(hours: hours, minutes: minutes, seconds: seconds)
+    }
 }
 
-// Custom SwiftUI view for the circular slider
-struct CircularSlider: View {
-    @Binding var timeRemaining: TimeInterval  // Binding to the time remaining
-    var maxTime: TimeInterval  // Maximum time for the timer
-    var diameter: CGFloat  // Diameter of the slider
+// Custom SwiftUI view for the Timer Picker
+struct TimerPicker: View {
+    @Binding var hours: Int
+    @Binding var minutes: Int
+    @Binding var seconds: Int
 
     var body: some View {
-        GeometryReader { geometry in
-            let center = CGPoint(x: geometry.size.width / 2, y: geometry.size.height / 2)
-            let radius = min(geometry.size.width, geometry.size.height) / 2
-
-            Path { path in
-                path.addArc(center: center, radius: radius, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 360 * Double(timeRemaining / maxTime)), clockwise: false)
-            }
-            .stroke(Color.green, lineWidth: 20)
-            .gesture(
-                DragGesture().onChanged { value in
-                    let vector = CGVector(dx: value.location.x - center.x, dy: value.location.y - center.y)
-                    let angle = atan2(vector.dy, vector.dx)
-                    let fixedAngle = angle < 0 ? angle + 2 * .pi : angle
-                    let percentage = fixedAngle / (2 * .pi)
-                    timeRemaining = maxTime * Double(percentage)
+        HStack {
+            Picker(selection: $hours, label: Text("Hours")) {
+                ForEach(0..<24) { hour in
+                    Text("\(hour) h").tag(hour)
                 }
-            )
+            }
+            .pickerStyle(WheelPickerStyle())
+            .frame(width: 80)
+            .clipped()
+
+            Picker(selection: $minutes, label: Text("Minutes")) {
+                ForEach(0..<60) { minute in
+                    Text("\(minute) m").tag(minute)
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
+            .frame(width: 80)
+            .clipped()
+
+            Picker(selection: $seconds, label: Text("Seconds")) {
+                ForEach(0..<60) { second in
+                    Text("\(second) s").tag(second)
+                }
+            }
+            .pickerStyle(WheelPickerStyle())
+            .frame(width: 80)
+            .clipped()
         }
+    }
+}
+
+// Custom SwiftUI view for the circular progress indicator
+struct CircularProgressView: View {
+    var progress: Double
+    var diameter: CGFloat
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(lineWidth: 10)
+                .opacity(0.3)
+                .foregroundColor(Color.green)
+
+            Circle()
+                .trim(from: 0.0, to: CGFloat(min(progress, 1.0)))
+                .stroke(style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                .foregroundColor(Color.green)
+                .rotationEffect(Angle(degrees: 270.0))
+                .animation(.linear, value: progress)
+        }
+        .frame(width: diameter, height: diameter)
     }
 }
 
