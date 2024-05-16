@@ -4,11 +4,13 @@ import SwiftUI
 class PomodoroTimerViewModel: ObservableObject {
     @Published var timerIsActive = false  // Boolean to track if the timer is active
     @Published var timeRemaining: TimeInterval = 5 * 60  // Default to 5 minutes for demonstration
+    @Published var totalTime: TimeInterval = 5 * 60  // To keep track of total time set initially
 
     private var timer: Timer?  // Optional Timer object
 
     // Function to start the timer
     func startTimer() {
+        totalTime = timeRemaining // Set the total time to the initial time remaining
         timerIsActive = true  // Sets the timer state to active
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             if let strongSelf = self, strongSelf.timeRemaining > 0 {
@@ -38,6 +40,7 @@ struct HomePageView: View {
 
     @State private var minutes = 5
     @State private var seconds = 0
+    @State private var selectedCharacter = "girl studying"  // Initial character image
 
     var body: some View {
         GeometryReader { geometry in
@@ -65,7 +68,7 @@ struct HomePageView: View {
                     Spacer()
                     ZStack {
                         CircularProgressView(progress: viewModel.timeRemaining / (TimeInterval(minutes * 60 + seconds) + 1), diameter: geometry.size.width * 0.5)
-                        Image("character1").resizable().scaledToFit().clipShape(Circle()).frame(width: geometry.size.width * 0.5, height: geometry.size.width * 0.5)
+                        Image(selectedCharacter).resizable().scaledToFit().clipShape(Circle()).frame(width: geometry.size.width * 0.5, height: geometry.size.width * 0.5)
                     }
                     
                     // Timer Picker
@@ -106,10 +109,26 @@ struct HomePageView: View {
             }
             .edgesIgnoringSafeArea(.all)
         }
+        .onChange(of: viewModel.timeRemaining, perform: { value in
+            updateCharacterImage()
+        })
     }
     
     private func updateRemainingTime() {
         viewModel.setTime(minutes: minutes, seconds: seconds)
+    }
+
+    private func updateCharacterImage() {
+        let twoThirdsTime = viewModel.totalTime * (2.0 / 3.0)
+        let oneThirdTime = viewModel.totalTime * (1.0 / 3.0)
+
+        if viewModel.timeRemaining <= oneThirdTime {
+            selectedCharacter = "girl sleeping"
+        } else if viewModel.timeRemaining <= twoThirdsTime {
+            selectedCharacter = "girl tired"
+        } else {
+            selectedCharacter = "girl studying"
+        }
     }
 }
 
@@ -164,9 +183,3 @@ struct CircularProgressView: View {
     }
 }
 
-// SwiftUI preview provider for ContentView
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomePageView()
-    }
-}
