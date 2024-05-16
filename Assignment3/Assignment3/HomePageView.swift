@@ -27,8 +27,8 @@ class PomodoroTimerViewModel: ObservableObject {
     }
 
     // Function to set time remaining directly
-    func setTime(hours: Int, minutes: Int, seconds: Int) {
-        timeRemaining = TimeInterval((hours * 3600) + (minutes * 60) + seconds)
+    func setTime(minutes: Int, seconds: Int) {
+        timeRemaining = TimeInterval((minutes * 60) + seconds)
     }
 }
 
@@ -36,7 +36,6 @@ class PomodoroTimerViewModel: ObservableObject {
 struct HomePageView: View {
     @StateObject private var viewModel = PomodoroTimerViewModel() // ViewModel instance
 
-    @State private var hours = 0
     @State private var minutes = 5
     @State private var seconds = 0
 
@@ -46,15 +45,15 @@ struct HomePageView: View {
                 // Sidebar with icons
                 VStack {
                     Spacer()
-                    Image(systemName: "bell").resizable().frame(width: 40, height: 40)
+                    Image(systemName: "house.fill").resizable().frame(width: 40, height: 40) // Home
                     Spacer()
-                    Image(systemName: "clock.fill").resizable().frame(width: 60, height: 60)
+                    Image(systemName: "list.bullet").resizable().frame(width: 40, height: 40) // Timeline
                     Spacer()
-                    Image(systemName: "alarm").resizable().frame(width: 40, height: 40)
+                    Image(systemName: "clock.fill").resizable().frame(width: 40, height: 40) // Timer
                     Spacer()
-                    Image(systemName: "stopwatch").resizable().frame(width: 40, height: 40)
+                    Image(systemName: "person.crop.circle").resizable().frame(width: 40, height: 40) // Character
                     Spacer()
-                    Image(systemName: "timer").resizable().frame(width: 40, height: 40)
+                    Image(systemName: "person.fill").resizable().frame(width: 40, height: 40) // Account
                     Spacer()
                 }
                 .frame(width: geometry.size.width * 0.15)
@@ -65,13 +64,12 @@ struct HomePageView: View {
                 VStack {
                     Spacer()
                     ZStack {
-                        CircularProgressView(progress: viewModel.timeRemaining / (TimeInterval(hours * 3600 + minutes * 60 + seconds) + 1), diameter: geometry.size.width * 0.5)
+                        CircularProgressView(progress: viewModel.timeRemaining / (TimeInterval(minutes * 60 + seconds) + 1), diameter: geometry.size.width * 0.5)
                         Image("character1").resizable().scaledToFit().clipShape(Circle()).frame(width: geometry.size.width * 0.5, height: geometry.size.width * 0.5)
                     }
                     
                     // Timer Picker
-                    TimerPicker(hours: $hours, minutes: $minutes, seconds: $seconds)
-                        .onChange(of: hours) { _ in updateRemainingTime() }
+                    TimerPicker(minutes: $minutes, seconds: $seconds)
                         .onChange(of: minutes) { _ in updateRemainingTime() }
                         .onChange(of: seconds) { _ in updateRemainingTime() }
                     
@@ -82,7 +80,7 @@ struct HomePageView: View {
                             if viewModel.timerIsActive {
                                 viewModel.stopTimer()
                             } else {
-                                viewModel.setTime(hours: hours, minutes: minutes, seconds: seconds)
+                                viewModel.setTime(minutes: minutes, seconds: seconds)
                                 viewModel.startTimer()
                             }
                         }) {
@@ -111,34 +109,24 @@ struct HomePageView: View {
     }
     
     private func updateRemainingTime() {
-        viewModel.setTime(hours: hours, minutes: minutes, seconds: seconds)
+        viewModel.setTime(minutes: minutes, seconds: seconds)
     }
 }
 
 // Custom SwiftUI view for the Timer Picker
 struct TimerPicker: View {
-    @Binding var hours: Int
     @Binding var minutes: Int
     @Binding var seconds: Int
 
     var body: some View {
         HStack {
-            Picker(selection: $hours, label: Text("Hours")) {
-                ForEach(0..<24) { hour in
-                    Text("\(hour) h").tag(hour)
-                }
-            }
-            .pickerStyle(WheelPickerStyle())
-            .frame(width: 80)
-            .clipped()
-
             Picker(selection: $minutes, label: Text("Minutes")) {
-                ForEach(0..<60) { minute in
+                ForEach(0..<181) { minute in
                     Text("\(minute) m").tag(minute)
                 }
             }
             .pickerStyle(WheelPickerStyle())
-            .frame(width: 80)
+            .frame(width: 100)
             .clipped()
 
             Picker(selection: $seconds, label: Text("Seconds")) {
@@ -147,7 +135,7 @@ struct TimerPicker: View {
                 }
             }
             .pickerStyle(WheelPickerStyle())
-            .frame(width: 80)
+            .frame(width: 100)
             .clipped()
         }
     }
