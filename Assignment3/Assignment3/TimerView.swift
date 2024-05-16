@@ -1,37 +1,36 @@
 import SwiftUI
 
 struct TimerView: View {
-    @StateObject private var viewModel = PomodoroTimerViewModel() // ViewModel instance
-    @Binding var selectedCharacter: Character  // Binding to the selected character
+    @StateObject private var viewModel = PomodoroTimerViewModel()
+    @Binding var selectedCharacter: Character
+    @EnvironmentObject var coinManager: CoinManager
 
     @State private var minutes = 5
     @State private var seconds = 0
-    @State private var currentCharacterImageName: String
-
-    init(selectedCharacter: Binding<Character>) {
-        self._selectedCharacter = selectedCharacter
-        self._currentCharacterImageName = State(initialValue: selectedCharacter.wrappedValue.studyingImageName)
-    }
+    @State private var currentCharacterImageName = "char1_studying"  // Default to the first character's studying image
 
     var body: some View {
         VStack {
             Spacer()
             ZStack {
                 CircularProgressView(progress: viewModel.timeRemaining / (TimeInterval(minutes * 60 + seconds) + 1), diameter: 200)
-                    .shadow(radius: 10)
                 Image(currentCharacterImageName)
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
                     .frame(width: 200, height: 200)
-                    .padding()
-                    .background(Circle().fill(Color.white).shadow(radius: 10))
             }
+            .onChange(of: viewModel.timeRemaining, perform: { _ in
+                updateCharacterImage()
+            })
+            .onChange(of: selectedCharacter, perform: { _ in
+                updateCharacterImage()
+            })
 
+            // Timer Picker
             TimerPicker(minutes: $minutes, seconds: $seconds)
                 .onChange(of: minutes) { _ in updateRemainingTime() }
                 .onChange(of: seconds) { _ in updateRemainingTime() }
-                .padding()
 
             Text("\(Int(viewModel.timeRemaining / 60)) minutes \(Int(viewModel.timeRemaining.truncatingRemainder(dividingBy: 60))) seconds")
                 .font(.title)
@@ -51,30 +50,32 @@ struct TimerView: View {
                         .padding()
                         .background(viewModel.timerIsActive ? Color.red : Color.green)
                         .clipShape(Circle())
-                        .shadow(radius: 10)
                 }
-                .padding(.horizontal)
 
                 Button("Reset") {
                     viewModel.stopTimer()
-                    updateRemainingTime()
                 }
                 .foregroundColor(.white)
                 .padding()
                 .background(Color.blue)
                 .clipShape(Circle())
-                .shadow(radius: 10)
             }
+
             Spacer()
+            HStack {
+                Image("coinIcon")
+                    .resizable()
+                    .frame(width: 32, height: 32)  // Bigger coin icon
+                Text("\(coinManager.coins)")
+                    .font(.title)
+                    .padding(.leading, 5)
+            }
+            .padding()
         }
         .padding()
-        .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
-        .onChange(of: viewModel.timeRemaining, perform: { value in
+        .onAppear {
             updateCharacterImage()
-        })
-        .onChange(of: selectedCharacter, perform: { newValue in
-            currentCharacterImageName = newValue.studyingImageName
-        })
+        }
     }
 
     private func updateRemainingTime() {
@@ -82,15 +83,8 @@ struct TimerView: View {
     }
 
     private func updateCharacterImage() {
-        let twoThirdsTime = viewModel.totalTime * (2.0 / 3.0)
-        let oneThirdTime = viewModel.totalTime * (1.0 / 3.0)
+        let totalSeconds = TimeInterval(minutes * 60 + seconds)
+        let timeRemainingRatio = viewModel.timeRemaining / totalSeconds
 
-        if viewModel.timeRemaining <= oneThirdTime {
-            currentCharacterImageName = selectedCharacter.sleepingImageName
-        } else if viewModel.timeRemaining <= twoThirdsTime {
-            currentCharacterImageName = selectedCharacter.tiredImageName
-        } else {
+        if timeRemainingRatio > 2/3 {
             currentCharacterImageName = selectedCharacter.studyingImageName
-        }
-    }
-}

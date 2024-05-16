@@ -1,8 +1,9 @@
 import SwiftUI
 
 struct HomePageView: View {
+    @StateObject private var coinManager = CoinManager()
     @State private var selectedCharacter = characters.first!  // Default to the first character
-    @State private var isHome = true  // Track whether the user is on the home page
+    @State private var isHome = true
 
     var body: some View {
         NavigationView {
@@ -11,22 +12,8 @@ struct HomePageView: View {
                     // Navigation Bar with icons
                     VStack(spacing: 30) {
                         Spacer()
-                        if isHome {
-                            VStack {
-                                Image(systemName: "house.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.gray)
-                                    .clipShape(Circle())
-                                    .shadow(radius: 10)
-                                Text("Home")
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-                            }
-                        } else {
-                            NavigationLink(destination: HomePageView().onAppear { isHome = true }) {
+                        if !isHome {
+                            NavigationLink(destination: HomePageView().onAppear { isHome = false }) {
                                 VStack {
                                     Image(systemName: "house.fill")
                                         .resizable()
@@ -41,10 +28,9 @@ struct HomePageView: View {
                                         .foregroundColor(.white)
                                 }
                             }
-                        }
-                        NavigationLink(destination: TimelineView().onAppear { isHome = false }) {
+                        } else {
                             VStack {
-                                Image(systemName: "list.bullet")
+                                Image(systemName: "house.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)
                                     .foregroundColor(.white)
@@ -52,12 +38,12 @@ struct HomePageView: View {
                                     .background(Color.blue)
                                     .clipShape(Circle())
                                     .shadow(radius: 10)
-                                Text("Timeline")
+                                Text("Home")
                                     .font(.caption)
                                     .foregroundColor(.white)
                             }
                         }
-                        NavigationLink(destination: TimerView(selectedCharacter: $selectedCharacter).onAppear { isHome = false }) {
+                        NavigationLink(destination: TimerView(selectedCharacter: $selectedCharacter).environmentObject(coinManager).onAppear { isHome = false }) {
                             VStack {
                                 Image(systemName: "clock.fill")
                                     .resizable()
@@ -72,7 +58,7 @@ struct HomePageView: View {
                                     .foregroundColor(.white)
                             }
                         }
-                        NavigationLink(destination: CharacterSelectionView(selectedCharacter: $selectedCharacter, characters: characters).onAppear { isHome = false }) {
+                        NavigationLink(destination: CharacterSelectionView(selectedCharacter: $selectedCharacter, characters: characters).environmentObject(coinManager).onAppear { isHome = false }) {
                             VStack {
                                 Image(systemName: "person.crop.circle")
                                     .resizable()
@@ -83,6 +69,21 @@ struct HomePageView: View {
                                     .clipShape(Circle())
                                     .shadow(radius: 10)
                                 Text("Character")
+                                    .font(.caption)
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        NavigationLink(destination: TimelineView().onAppear { isHome = false }) {
+                            VStack {
+                                Image(systemName: "list.bullet")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 10)
+                                Text("Timeline")
                                     .font(.caption)
                                     .foregroundColor(.white)
                             }
@@ -104,29 +105,37 @@ struct HomePageView: View {
                         }
                         Spacer()
                     }
-                    .frame(width: 80)
-                    .padding(.vertical, 20)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom))
+                    .frame(width: geometry.size.width * 0.2)
+                    .background(Color.blue)
 
                     // Main content area
                     VStack {
                         Spacer()
-                        Image(selectedCharacter.selectionImageName)
-                            .resizable()
-                            .scaledToFit()
-                            .clipShape(Circle())
-                            .frame(width: 200, height: 200)
-                            .padding()
-                            .background(Circle().fill(Color.white).shadow(radius: 10))
+                        ZStack {
+                            Image(selectedCharacter.studyingImageName)
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                                .frame(width: 200, height: 200)
+                                .padding()
+                                .background(Circle().fill(Color.white).shadow(radius: 10))
+                        }
                         Spacer()
+                        HStack {
+                            Image("coinIcon")
+                                .resizable()
+                                .frame(width: 32, height: 32)  // Bigger coin icon
+                            Text("\(coinManager.coins)")
+                                .font(.title)
+                                .padding(.leading, 5)
+                        }
+                        .padding()
                     }
-                    .frame(width: geometry.size.width * 0.85)
-                    .background(Color(UIColor.systemBackground))
+                    .frame(width: geometry.size.width * 0.8)
+                    .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
                 }
-                .edgesIgnoringSafeArea(.all)
             }
         }
-        .accentColor(.black)  // Set the back button color to black
     }
 }
 

@@ -21,6 +21,7 @@
 		8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */; };
 		8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844422BF67D9400F99183 /* Timeline View.swift */; };
 		8BA844452BF67DA500F99183 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844442BF67DA500F99183 /* AccountView.swift */; };
+		8BA844472BF696C100F99183 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844462BF696C100F99183 /* CoinManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroTimerViewModel.swift; sourceTree = "<group>"; };
 		8BA844422BF67D9400F99183 /* Timeline View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timeline View.swift"; sourceTree = "<group>"; };
 		8BA844442BF67DA500F99183 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		8BA844462BF696C100F99183 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				8BA8443C2BF678FC00F99183 /* Helper.swift */,
 				8BA844422BF67D9400F99183 /* Timeline View.swift */,
 				8BA844442BF67DA500F99183 /* AccountView.swift */,
+				8BA844462BF696C100F99183 /* CoinManager.swift */,
 				8B5D4B082BF0EB2200572768 /* Assets.xcassets */,
 				8B5D4B0A2BF0EB2200572768 /* Preview Content */,
 			);
@@ -282,6 +285,7 @@
 				8BA844372BF6776800F99183 /* HomePageView.swift in Sources */,
 				8BA8443B2BF678D000F99183 /* CharacterSelectionView.swift in Sources */,
 				8B5D4B052BF0EB2100572768 /* ContentView.swift in Sources */,
+				8BA844472BF696C100F99183 /* CoinManager.swift in Sources */,
 				8BA844452BF67DA500F99183 /* AccountView.swift in Sources */,
 				8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */,
 				8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */,
