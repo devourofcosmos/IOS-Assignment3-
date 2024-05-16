@@ -27,7 +27,6 @@ struct TimerView: View {
                 updateCharacterImage()
             })
 
-            // Timer Picker
             TimerPicker(minutes: $minutes, seconds: $seconds)
                 .onChange(of: minutes) { _ in updateRemainingTime() }
                 .onChange(of: seconds) { _ in updateRemainingTime() }
@@ -69,10 +68,12 @@ struct TimerView: View {
                 Text("\(coinManager.coins)")
                     .font(.title)
                     .padding(.leading, 5)
+                    .foregroundColor(Color.white)
             }
             .padding()
         }
         .padding()
+        .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
         .onAppear {
             updateCharacterImage()
         }
@@ -88,3 +89,17 @@ struct TimerView: View {
 
         if timeRemainingRatio > 2/3 {
             currentCharacterImageName = selectedCharacter.studyingImageName
+        } else if timeRemainingRatio > 1/3 {
+            currentCharacterImageName = selectedCharacter.tiredImageName
+        } else {
+            currentCharacterImageName = selectedCharacter.sleepingImageName
+        }
+    }
+}
+
+struct TimerView_Previews: PreviewProvider {
+    static var previews: some View {
+        TimerView(selectedCharacter: .constant(characters.first!))
+            .environmentObject(CoinManager())
+    }
+}

@@ -18,6 +18,7 @@ struct CharacterSelectionView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.top, 20)
+                .foregroundColor(Color.white)
 
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 20) {
@@ -44,6 +45,7 @@ struct CharacterSelectionView: View {
                             Text(character.name)
                                 .font(.headline)
                                 .padding(.leading, 10)
+                                .foregroundColor(Color.white)
 
                             Spacer()
 
@@ -66,14 +68,16 @@ struct CharacterSelectionView: View {
             HStack {
                 Image("coinIcon")
                     .resizable()
-                    .frame(width: 32, height: 32)  // Bigger coin icon
+                    .frame(width: 40, height: 40)  // Bigger coin icon
                 Text("\(coinManager.coins)")
                     .font(.title)
                     .padding(.leading, 5)
+                    .foregroundColor(Color.white)
             }
             .padding()
         }
         .padding()
+        .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
         .alert(isPresented: $showUnlockAlert) {
             Alert(
                 title: Text("Unlock Character"),
@@ -89,7 +93,6 @@ struct CharacterSelectionView: View {
                 secondaryButton: .cancel()
             )
         }
-        .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
     }
 }
 

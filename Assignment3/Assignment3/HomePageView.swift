@@ -106,7 +106,7 @@ struct HomePageView: View {
                         Spacer()
                     }
                     .frame(width: geometry.size.width * 0.2)
-                    .background(Color.blue)
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom))
 
                     // Main content area
                     VStack {
@@ -128,11 +128,12 @@ struct HomePageView: View {
                             Text("\(coinManager.coins)")
                                 .font(.title)
                                 .padding(.leading, 5)
+                                .foregroundColor(Color.white)
                         }
                         .padding()
                     }
                     .frame(width: geometry.size.width * 0.8)
-                    .background(Color(UIColor.systemBackground).edgesIgnoringSafeArea(.all))
+                    .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
                 }
             }
         }
