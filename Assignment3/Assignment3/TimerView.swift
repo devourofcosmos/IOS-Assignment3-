@@ -1,12 +1,11 @@
 import SwiftUI
-
 struct TimerView: View {
     @StateObject private var viewModel = PomodoroTimerViewModel()
     @Binding var selectedCharacter: Character
     @EnvironmentObject var coinManager: CoinManager
 
-    @State private var minutes = 5
-    @State private var seconds = 0
+    @State private var minutes = 0  // Start at 0 minutes
+    @State private var seconds = 0  // Start at 0 seconds
     @State private var currentCharacterImageName = "char1_studying"  // Default to the first character's studying image
 
     var body: some View {

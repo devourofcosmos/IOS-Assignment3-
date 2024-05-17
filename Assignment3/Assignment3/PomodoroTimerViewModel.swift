@@ -1,9 +1,8 @@
 import Foundation
 import SwiftUI
-
 class PomodoroTimerViewModel: ObservableObject {
     @Published var timerIsActive = false  // Boolean to track if the timer is active
-    @Published var timeRemaining: TimeInterval = 180 * 60 // Stores the time remaining, initialized to 180 minutes
+    @Published var timeRemaining: TimeInterval = 0  // Start the timer at 0 by default
     @Published var totalTimerUsage: TimeInterval = 0  // Track total timer usage
     @Published var coins: Int = 0  // Track earned coins
     @Published var selectedCharacter: Character = characters.first!  // Default character
@@ -30,7 +29,7 @@ class PomodoroTimerViewModel: ObservableObject {
         timerIsActive = false  // Sets the timer state to inactive
         timer?.invalidate()  // Invalidates the timer
         timer = nil  // Clears the timer
-        timeRemaining = 180 * 60 // Reset the time to 180 minutes
+        timeRemaining = 0  // Reset the time to 0
     }
 
     // Check if coins should be awarded
