@@ -14,6 +14,21 @@ struct CharacterSelectionView: View {
 
     var body: some View {
         VStack {
+            HStack {
+                Button(action: {
+                    // Navigate back to the home page
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                        rootViewController.popViewController(animated: true)
+                    }
+                }) {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.white)
+                        .padding()
+                }
+                Spacer()
+            }
+            .zIndex(1)
             Text("Select a Character")
                 .font(.largeTitle)
                 .fontWeight(.bold)

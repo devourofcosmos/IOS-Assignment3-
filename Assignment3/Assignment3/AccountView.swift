@@ -5,10 +5,26 @@ struct AccountView: View {
 
     var body: some View {
         VStack {
+            HStack {
+                Button(action: {
+                    // Navigate back to the home page
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                       let rootViewController = windowScene.windows.first?.rootViewController as? UINavigationController {
+                        rootViewController.popViewController(animated: true)
+                    }
+                }) {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.white)
+                        .padding()
+                }
+                Spacer()
+            }
+            .zIndex(1)
             if viewModel.isLoggedIn {
                 Text("Welcome, \(viewModel.username)!")
                     .font(.title)
                     .padding()
+                    .foregroundColor(.white)
                 Button("Logout") {
                     viewModel.logout()
                 }
@@ -23,10 +39,12 @@ struct AccountView: View {
                             .padding()
                             .background(Color(.secondarySystemBackground))
                             .cornerRadius(10)
+                            .foregroundColor(.black)
                         SecureField("New Password", text: $viewModel.signUpPassword)
                             .padding()
                             .background(Color(.secondarySystemBackground))
                             .cornerRadius(10)
+                            .foregroundColor(.black)
                         Button("Create Account") {
                             viewModel.createAccount()
                         }
@@ -38,6 +56,7 @@ struct AccountView: View {
                             viewModel.showSignUp = false
                         }
                         .padding()
+                        .foregroundColor(.white)
                     }
                 } else {
                     VStack {
@@ -45,10 +64,12 @@ struct AccountView: View {
                             .padding()
                             .background(Color(.secondarySystemBackground))
                             .cornerRadius(10)
+                            .foregroundColor(.black)
                         SecureField("Password", text: $viewModel.password)
                             .padding()
                             .background(Color(.secondarySystemBackground))
                             .cornerRadius(10)
+                            .foregroundColor(.black)
                         Button("Login") {
                             viewModel.login()
                         }
@@ -60,13 +81,13 @@ struct AccountView: View {
                             viewModel.showSignUp = true
                         }
                         .padding()
+                        .foregroundColor(.white)
                     }
                 }
             }
         }
         .padding()
-        .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom))
-        .foregroundColor(.white)
+        .background(LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .top, endPoint: .bottom).edgesIgnoringSafeArea(.all))
         .navigationTitle("Account")
     }
 }
