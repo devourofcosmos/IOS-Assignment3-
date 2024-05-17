@@ -23,11 +23,8 @@
 		8BA844452BF67DA500F99183 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844442BF67DA500F99183 /* AccountView.swift */; };
 		8BA844472BF696C100F99183 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA844462BF696C100F99183 /* CoinManager.swift */; };
 		E66D0C6C2BF7559200FE2D04 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C6B2BF7559200FE2D04 /* AccountViewModel.swift */; };
-		E66D0C702BF75F2B00FE2D04 /* StudySessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C6F2BF75F2B00FE2D04 /* StudySessionViewModel.swift */; };
-		E66D0C762BF761E600FE2D04 /* Assignment3CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C742BF761E600FE2D04 /* Assignment3CoreData.xcdatamodeld */; };
-		E66D0C792BF763C700FE2D04 /* StudySession+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C772BF763C700FE2D04 /* StudySession+CoreDataClass.swift */; };
-		E66D0C7A2BF763C700FE2D04 /* StudySession+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C782BF763C700FE2D04 /* StudySession+CoreDataProperties.swift */; };
-		E66D0C7C2BF7642400FE2D04 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C7B2BF7642400FE2D04 /* PersistenceController.swift */; };
+		E66D0C7E2BF777CB00FE2D04 /* StudySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C7D2BF777CB00FE2D04 /* StudySession.swift */; };
+		E66D0C802BF777FE00FE2D04 /* StudySessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66D0C7F2BF777FE00FE2D04 /* StudySessionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,11 +64,8 @@
 		8BA844442BF67DA500F99183 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		8BA844462BF696C100F99183 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 		E66D0C6B2BF7559200FE2D04 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
-		E66D0C6F2BF75F2B00FE2D04 /* StudySessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionViewModel.swift; sourceTree = "<group>"; };
-		E66D0C752BF761E600FE2D04 /* Assignment3CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Assignment3CoreData.xcdatamodel; sourceTree = "<group>"; };
-		E66D0C772BF763C700FE2D04 /* StudySession+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudySession+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E66D0C782BF763C700FE2D04 /* StudySession+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StudySession+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E66D0C7B2BF7642400FE2D04 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		E66D0C7D2BF777CB00FE2D04 /* StudySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySession.swift; sourceTree = "<group>"; };
+		E66D0C7F2BF777FE00FE2D04 /* StudySessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudySessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +96,6 @@
 		8B5D4AF82BF0EB2100572768 = {
 			isa = PBXGroup;
 			children = (
-				E66D0C742BF761E600FE2D04 /* Assignment3CoreData.xcdatamodeld */,
-				E66D0C772BF763C700FE2D04 /* StudySession+CoreDataClass.swift */,
-				E66D0C782BF763C700FE2D04 /* StudySession+CoreDataProperties.swift */,
 				8B5D4B032BF0EB2100572768 /* Assignment3 */,
 				8B5D4B142BF0EB2200572768 /* Assignment3Tests */,
 				8B5D4B1E2BF0EB2200572768 /* Assignment3UITests */,
@@ -126,8 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				8B5D4B042BF0EB2100572768 /* ContentView.swift */,
-				E66D0C7B2BF7642400FE2D04 /* PersistenceController.swift */,
-				E66D0C6F2BF75F2B00FE2D04 /* StudySessionViewModel.swift */,
+				E66D0C7D2BF777CB00FE2D04 /* StudySession.swift */,
+				E66D0C7F2BF777FE00FE2D04 /* StudySessionManager.swift */,
 				8BA8443E2BF67C5000F99183 /* PomodoroTimerViewModel.swift */,
 				8B7B7C742BF0F00A001E1E52 /* TimerView.swift */,
 				8BA844362BF6776800F99183 /* HomePageView.swift */,
@@ -299,17 +290,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E66D0C702BF75F2B00FE2D04 /* StudySessionViewModel.swift in Sources */,
 				8B7B7C752BF0F00A001E1E52 /* TimerView.swift in Sources */,
-				E66D0C762BF761E600FE2D04 /* Assignment3CoreData.xcdatamodeld in Sources */,
 				8BA844372BF6776800F99183 /* HomePageView.swift in Sources */,
+				E66D0C802BF777FE00FE2D04 /* StudySessionManager.swift in Sources */,
 				8BA8443B2BF678D000F99183 /* CharacterSelectionView.swift in Sources */,
-				E66D0C792BF763C700FE2D04 /* StudySession+CoreDataClass.swift in Sources */,
-				E66D0C7A2BF763C700FE2D04 /* StudySession+CoreDataProperties.swift in Sources */,
 				8B5D4B052BF0EB2100572768 /* ContentView.swift in Sources */,
 				8BA844472BF696C100F99183 /* CoinManager.swift in Sources */,
 				E66D0C6C2BF7559200FE2D04 /* AccountViewModel.swift in Sources */,
-				E66D0C7C2BF7642400FE2D04 /* PersistenceController.swift in Sources */,
+				E66D0C7E2BF777CB00FE2D04 /* StudySession.swift in Sources */,
 				8BA844452BF67DA500F99183 /* AccountView.swift in Sources */,
 				8BA8443F2BF67C5000F99183 /* PomodoroTimerViewModel.swift in Sources */,
 				8BA844432BF67D9400F99183 /* Timeline View.swift in Sources */,
@@ -644,19 +632,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E66D0C742BF761E600FE2D04 /* Assignment3CoreData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E66D0C752BF761E600FE2D04 /* Assignment3CoreData.xcdatamodel */,
-			);
-			currentVersion = E66D0C752BF761E600FE2D04 /* Assignment3CoreData.xcdatamodel */;
-			path = Assignment3CoreData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8B5D4AF92BF0EB2100572768 /* Project object */;
 }

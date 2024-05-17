@@ -20,16 +20,16 @@ struct TimerView: View {
                     .clipShape(Circle())
                     .frame(width: 200, height: 200)
             }
-            .onChange(of: viewModel.timeRemaining, perform: { _ in
+            .onChange(of: viewModel.timeRemaining) { _, _ in
                 updateCharacterImage()
-            })
-            .onChange(of: selectedCharacter, perform: { _ in
+            }
+            .onChange(of: selectedCharacter) { _, _ in
                 updateCharacterImage()
-            })
+            }
 
             TimerPicker(minutes: $minutes, seconds: $seconds)
-                .onChange(of: minutes) { _ in updateRemainingTime() }
-                .onChange(of: seconds) { _ in updateRemainingTime() }
+                .onChange(of: minutes) { _, _ in updateRemainingTime() }
+                .onChange(of: seconds) { _, _ in updateRemainingTime() }
                 .padding(.top, 20)
 
             Text("\(Int(viewModel.timeRemaining / 60)) minutes \(Int(viewModel.timeRemaining.truncatingRemainder(dividingBy: 60))) seconds")

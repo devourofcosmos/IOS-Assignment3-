@@ -1,3 +1,4 @@
+import Foundation
 import SwiftUI
 
 class PomodoroTimerViewModel: ObservableObject {
@@ -5,6 +6,7 @@ class PomodoroTimerViewModel: ObservableObject {
     @Published var timeRemaining: TimeInterval = 180 * 60 // Stores the time remaining, initialized to 180 minutes
     @Published var totalTimerUsage: TimeInterval = 0  // Track total timer usage
     @Published var coins: Int = 0  // Track earned coins
+    @Published var selectedCharacter: Character = characters.first!  // Default character
 
     private var timer: Timer?  // Optional Timer object
 
@@ -18,6 +20,7 @@ class PomodoroTimerViewModel: ObservableObject {
                 strongSelf.checkForCoinReward()  // Check if coins should be awarded
             } else {
                 self?.stopTimer()  // Stop the timer if time runs out
+                self?.completeSession()  // Save the session when the timer completes
             }
         }
     }
@@ -28,7 +31,6 @@ class PomodoroTimerViewModel: ObservableObject {
         timer?.invalidate()  // Invalidates the timer
         timer = nil  // Clears the timer
         timeRemaining = 180 * 60 // Reset the time to 180 minutes
-        
     }
 
     // Check if coins should be awarded
@@ -43,5 +45,11 @@ class PomodoroTimerViewModel: ObservableObject {
     // Function to set the time
     func setTime(minutes: Int, seconds: Int) {
         timeRemaining = TimeInterval(minutes * 60 + seconds)
+    }
+
+    // Function to complete a study session and save it to UserDefaults
+    func completeSession() {
+        let newSession = StudySession(id: UUID(), duration: Int(totalTimerUsage / 60), characterBubble: selectedCharacter.selectionImageName, timestamp: Date())
+        StudySessionManager.shared.saveStudySession(session: newSession)
     }
 }
