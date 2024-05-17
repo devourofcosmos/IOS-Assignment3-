@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomePageView: View {
     @StateObject private var coinManager = CoinManager()
+    @StateObject private var accountViewModel = AccountViewModel()
     @State private var selectedCharacter = characters.first!  // Default to the first character
     @State private var isHome = true
 
@@ -13,7 +14,7 @@ struct HomePageView: View {
                     VStack(spacing: 30) {
                         Spacer()
                         if !isHome {
-                            NavigationLink(destination: HomePageView().onAppear { isHome = false }) {
+                            NavigationLink(destination: HomePageView().onAppear { isHome = true }) {
                                 VStack {
                                     Image(systemName: "house.fill")
                                         .resizable()
@@ -88,7 +89,7 @@ struct HomePageView: View {
                                     .foregroundColor(.white)
                             }
                         }
-                        NavigationLink(destination: AccountView().onAppear { isHome = false }) {
+                        NavigationLink(destination: AccountView(viewModel: accountViewModel).onAppear { isHome = false }) {
                             VStack {
                                 Image(systemName: "person.fill")
                                     .resizable()
